@@ -1,1 +1,49 @@
+// authenticates you with the API standard library
+const lib = require('lib')({token: process.env.STDLIB_SECRET_TOKEN});
 
+let messageResponse = await lib.discord.channels['@0.0.6'].messages.create({
+  channel_id: `${context.params.event.channel_id}`,
+  content: [
+    `Hey <@!${context.params.event.author.id}>! I'm a bot powered by the 🛠️ **Fixers P.E.N.T.S.** project.`,
+    `You mentioned me in a message, so here I am!`
+  ].join('\n'),
+  embed: {
+    title: 'SERVER INFORMATION',
+    type: 'rich',
+    color: 0x00AA00, // Green color
+    description: 'Use !help if you want to know what i can do. Btw, ignore the rest of spammer bots that might reply. I am the real deal!',
+    fields: [{
+      name: '*MESSAGE FORMATING*',
+      value: [
+        'For more information check out the #🦾︱bots channel.',
+        'Or ask CB, i am sure he is more than happy to help. :wink: '
+      ].join('\n')
+    }, {
+      name: 'I am still in beta, so be gentle!',
+      value: [
+        'More info soon on:',
+        'https://FXRS.io'
+      ].join('\n')
+    }, {
+      name: '**TOKEN INFORMATION**',
+      value: [
+        '🟢💰  **Token Contract:** 0xFa34699b3833639A3A533807c0095D2F6a2eB952',
+        '🟢📝  **Contract Source:** https://bscscan.com/address/0xFa34699b3833639A3A533807c0095D2F6a2eB952#code ✔️',
+        '🟢💼  **Core Wallet:** https://bit.ly/fxrscorewallet',
+        '🟢📈  **Ticker:** FXRS',
+        '🟢🌐  **Network:** BSC',
+        '🟢👨‍💻  **Platform:** Solidity',
+        '🟢🔗  **BscScan:** https://bit.ly/fxrsbscscan',
+        '🟢🔗  **EtherScan:** https://etherscan.io/address/0xFa34699b3833639A3A533807c0095D2F6a2eB952',
+        '🟢🛡️  **Audit:** https://bit.ly/fxrsaudit29jan',
+        '🟢📲  **Available on:** TrustWallet, PancakeSwap, Uniswap, MDex',
+        '🔴🔜  **WIP:** ... ',
+        '🔴🔜  **PRE-SALE:** ... ',
+        '🔴🔜  **IDO:** ... '
+        ].join('\n')
+    }]
+  },
+  tts: false
+});
+
+return messageResponse;
